@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Learning Space Smart Checking Report</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>Learning Space Smart Checking Report</header>
+
+  <main>
+    <!-- Reporting section -->
+    <div class="reporting section">
+      <h2>Reporting</h2>
+      <div id="report-list"></div>
+    </div>
+
+    <!-- Reporting by AI section -->
+    <div class="reporting-ai section">
+      <h2>Reporting with AI</h2>
+      <div class="ai-input-container">
+        <textarea id="ai-report-input" placeholder="Enter your report text here..." rows="4"></textarea>
+        <button id="ai-submit-btn" type="button">Submit</button>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-box section">
+      <label for="search">Search:</label>
+      <input type="text" id="search" placeholder="Search learning space...">
+    </div>
+
+    <!-- Column headers -->
+    <div class="header-row">
+      <div>Learning Space</div>
+      <div>Contact</div>
+      <div>Report</div>
+    </div>
+
+    <!-- Learning spaces -->
+    <div id="spaces"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
