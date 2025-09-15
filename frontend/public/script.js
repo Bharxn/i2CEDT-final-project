@@ -255,6 +255,14 @@ function renderReports() {
   });
 }
 
+// Global refs for modal
+const reportModal = document.getElementById("reportModal");
+const closeModal = document.getElementById("closeModal");
+const reportInput = document.getElementById("reportInput");
+const submitReport = document.getElementById("submitReport");
+
+let currentSpace = null; // เก็บว่า user กดจาก library ไหน
+
 // Render spaces
 function renderSpaces(filter = "") {
   spaceContainer.innerHTML = "";
@@ -277,20 +285,40 @@ function renderSpaces(filter = "") {
           <button class="report-btn">Report</button>
         </div>
       `;
-      // Add report button action
-      card.querySelector(".report-btn").onclick = async () => {
-        const issue = prompt("Enter your report issue:");
-        if (issue) {
-          const newReport = { place: s.name, issue };
-          const success = await addReport(newReport);
-          if (!success) {
-            alert('Failed to add report. Please try again.');
-          }
-        }
+      // Report button action
+      card.querySelector(".report-btn").onclick = () => {
+        currentSpace = s;           // เก็บว่ามาจากที่ไหน
+        reportInput.value = "";     // เคลียร์ input เดิม
+        reportModal.style.display = "block"; // เปิด modal
       };
       spaceContainer.appendChild(card);
     });
 }
+
+// Close modal
+closeModal.onclick = () => {
+  reportModal.style.display = "none";
+};
+
+// Submit report
+submitReport.onclick = async () => {
+  const issue = reportInput.value.trim();
+  if (issue && currentSpace) {
+    const newReport = { place: currentSpace.name, issue };
+    const success = await addReport(newReport);
+    if (!success) {
+      alert('Failed to add report. Please try again.');
+    }
+    reportModal.style.display = "none";
+  }
+};
+
+// ปิด modal ถ้าคลิกนอกกล่อง
+window.onclick = (e) => {
+  if (e.target === reportModal) {
+    reportModal.style.display = "none";
+  }
+};
 
 // Search functionality
 searchInput.addEventListener("input", e => {
