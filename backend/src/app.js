@@ -1,9 +1,8 @@
 import express from "express";
 import cors from "cors";
 
-// import ItemRoute from "./routes/itemRoute.js";
-// import MemberRoute from "./routes/memberRoute.js";
 import ReportRoute from "./routes/reportRoute.js";
+import AIReportRoute from "./routes/AIReportRoute.js";
 
 const app = express();
 
@@ -20,8 +19,7 @@ app.get("/", (req, res) => {
 });
 
 // use routes
-// app.use("/items", ItemRoute);
-// app.use("/members", MemberRoute);
 app.use("/api/reports", ReportRoute);
+app.use("/api/ai-report", AIReportRoute);
 
 export default app;

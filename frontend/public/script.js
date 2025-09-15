@@ -300,6 +300,7 @@ searchInput.addEventListener("input", e => {
 // AI Reporting functionality
 async function submitAIReport() {
   const reportText = aiReportInput.value.trim();
+  console.log(reportText);
   
   if (!reportText) {
     alert("Please enter some text before submitting.");
@@ -316,7 +317,7 @@ async function submitAIReport() {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ text: reportText })
+    body: JSON.stringify({ place: reportText, issue: reportText })
   })
   .then(response => {
     if (!response.ok) {
@@ -328,25 +329,25 @@ async function submitAIReport() {
     console.log('AI Report response:', data);
     
     // Add the extracted reports to the database
-    if (data.reports && Array.isArray(data.reports)) {
-      let successCount = 0;
+    if (data.reports) {
+      // let successCount = 0;
+
+      // for (const report of data.reports) {
+      //   const success = await addReport(report);
+      //   if (success) {
+      //     successCount++;
+      //   }
+      // }
       
-      for (const report of data.reports) {
-        const success = await addReport(report);
-        if (success) {
-          successCount++;
-        }
-      }
-      
-      if (successCount > 0) {
-        alert(`Successfully processed ${successCount} report(s) from your text!`);
-      } else {
-        alert('Failed to save reports to database.');
-      }
+      // if (successCount > 0) {
+      //   alert(`Successfully processed ${successCount} report(s) from your text!`);
+      // } else {
+      //   alert('Failed to save reports to database.');
+      // }
     } else {
       alert('No reports could be extracted from your text.');
     }
-    
+    await fetchReports();
     aiReportInput.value = ''; // Clear the input
   })
   .catch(error => {

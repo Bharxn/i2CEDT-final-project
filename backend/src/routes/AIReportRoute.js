@@ -1,33 +1,33 @@
 import express from "express";
 import {
-  getAllReports,
-  createReport,
-  updateReport,
-  deleteReport,
-} from "../controllers/reportController.js";
+  aiGetAllReports,
+  aiCreateReport,
+  aiUpdateReport,
+  aiDeleteReport,
+} from "../controllers/AIReportController.js";
 
 const router = express.Router();
 
 // @route   GET /api/reports
 // @desc    Get all reports
 // @access  Public
-router.get("/", getAllReports);
+router.get("/", aiGetAllReports);
 
 // @route   POST /api/reports
 // @desc    Create new report
 // @access  Public
 // Body: { place: string, issue: string }
-router.post("/", createReport);
+router.post("/", aiCreateReport);
 
 // @route   PUT /api/reports/:id
 // @desc    Update report
 // @access  Public
 // Body: { place: string, issue: string }
-router.put("/:id", updateReport);
+router.put("/:id", aiUpdateReport);
 
 // @route   DELETE /api/reports/:id
 // @desc    Delete report
 // @access  Public
-router.delete("/:id", deleteReport);
+router.delete("/:id", aiDeleteReport);
 
 export default router;
