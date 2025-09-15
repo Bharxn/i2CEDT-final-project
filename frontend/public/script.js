@@ -128,7 +128,7 @@ const aiSubmitBtn = document.getElementById("ai-submit-btn");
 // API functions for database operations
 async function fetchReports() {
   try {
-    const response = await fetch('/api/reports');
+    const response = await fetch('http://localhost:3222/api/reports');
     if (response.ok) {
       const data = await response.json();
       reports = data.reports || [];
@@ -141,7 +141,7 @@ async function fetchReports() {
 
 async function addReport(report) {
   try {
-    const response = await fetch('/api/reports', {
+    const response = await fetch('http://localhost:3222/api/reports', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -150,9 +150,8 @@ async function addReport(report) {
     });
     
     if (response.ok) {
-      const data = await response.json();
-      reports.push(data.report);
-      renderReports();
+      // Instead of updating local array, fetch fresh data from database
+      await fetchReports();
       return true;
     }
     return false;
@@ -164,8 +163,8 @@ async function addReport(report) {
 
 async function updateReport(index, updatedReport) {
   try {
-    const reportId = reports[index].id || index; // Use ID if available, fallback to index
-    const response = await fetch(`/api/reports/${reportId}`, {
+    const reportId = reports[index]._id || index; // Use _id from MongoDB
+    const response = await fetch(`http://localhost:3222/api/reports/${reportId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -174,9 +173,8 @@ async function updateReport(index, updatedReport) {
     });
     
     if (response.ok) {
-      const data = await response.json();
-      reports[index] = data.report;
-      renderReports();
+      // Instead of updating local array, fetch fresh data from database
+      await fetchReports();
       return true;
     }
     return false;
@@ -188,19 +186,27 @@ async function updateReport(index, updatedReport) {
 
 async function deleteReport(index) {
   try {
-    const reportId = reports[index].id || index; // Use ID if available, fallback to index
-    const response = await fetch(`/api/reports/${reportId}`, {
+    const reportId = reports[index]._id || index; // Use _id from MongoDB
+    console.log(`Frontend: Attempting to delete report with ID: ${reportId}`);
+    console.log(`Frontend: Report data:`, reports[index]);
+    
+    const response = await fetch(`http://localhost:3222/api/reports/${reportId}`, {
       method: 'DELETE'
     });
     
+    console.log(`Frontend: Delete response status: ${response.status}`);
+    
     if (response.ok) {
-      reports.splice(index, 1);
-      renderReports();
+      console.log('Frontend: Delete successful, fetching fresh data from database');
+      // Instead of updating local array, fetch fresh data from database
+      await fetchReports();
       return true;
+    } else {
+      console.log('Frontend: Delete failed, response not ok');
+      return false;
     }
-    return false;
   } catch (error) {
-    console.error('Error deleting report:', error);
+    console.error('Frontend: Error deleting report:', error);
     return false;
   }
 }
@@ -233,11 +239,15 @@ function renderReports() {
 
     // Remove button
     div.querySelector(".btn-remove").onclick = async () => {
+      console.log('Frontend: Remove button clicked for index:', index);
       if (confirm('Are you sure you want to delete this report?')) {
+        console.log('Frontend: User confirmed deletion');
         const success = await deleteReport(index);
         if (!success) {
           alert('Failed to delete report. Please try again.');
         }
+      } else {
+        console.log('Frontend: User cancelled deletion');
       }
     };
 
@@ -301,7 +311,7 @@ async function submitAIReport() {
   aiSubmitBtn.disabled = true;
 
   // Send API request to backend
-  fetch('/api/ai-report', {
+  fetch('http://localhost:3222/api/ai-report', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
