@@ -124,11 +124,12 @@ const reportList = document.getElementById("report-list");
 const searchInput = document.getElementById("search");
 const aiReportInput = document.getElementById("ai-report-input");
 const aiSubmitBtn = document.getElementById("ai-submit-btn");
+const placeFilter = document.getElementById("place-filter");
 
 // API functions for database operations
 async function fetchReports() {
   try {
-    const response = await fetch('http://localhost:3222/api/reports');
+    const response = await fetch(`${window.API_CONFIG.API_BASE_URL}${window.API_CONFIG.REPORTS_ENDPOINT}`);
     if (response.ok) {
       const data = await response.json();
       reports = data.reports || [];
@@ -141,7 +142,7 @@ async function fetchReports() {
 
 async function addReport(report) {
   try {
-    const response = await fetch('http://localhost:3222/api/reports', {
+    const response = await fetch(`${window.API_CONFIG.API_BASE_URL}${window.API_CONFIG.REPORTS_ENDPOINT}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -164,7 +165,7 @@ async function addReport(report) {
 async function updateReport(index, updatedReport) {
   try {
     const reportId = reports[index]._id || index; // Use _id from MongoDB
-    const response = await fetch(`http://localhost:3222/api/reports/${reportId}`, {
+    const response = await fetch(`${window.API_CONFIG.API_BASE_URL}${window.API_CONFIG.REPORTS_ENDPOINT}/${reportId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -190,7 +191,7 @@ async function deleteReport(index) {
     console.log(`Frontend: Attempting to delete report with ID: ${reportId}`);
     console.log(`Frontend: Report data:`, reports[index]);
     
-    const response = await fetch(`http://localhost:3222/api/reports/${reportId}`, {
+    const response = await fetch(`${window.API_CONFIG.API_BASE_URL}${window.API_CONFIG.REPORTS_ENDPOINT}/${reportId}`, {
       method: 'DELETE'
     });
     
@@ -214,7 +215,34 @@ async function deleteReport(index) {
 // Render reports
 function renderReports() {
   reportList.innerHTML = "";
-  reports.forEach((r, index) => {
+  
+  // Get the selected filter value
+  const selectedPlace = placeFilter.value;
+  
+  // Filter reports based on selected place
+  const filteredReports = selectedPlace 
+    ? reports.filter(r => r.place === selectedPlace)
+    : reports;
+  
+  // Show message if no reports match the filter
+  if (filteredReports.length === 0 && reports.length > 0) {
+    const noResultsDiv = document.createElement("div");
+    noResultsDiv.className = "no-results";
+    noResultsDiv.innerHTML = `
+      <p style="text-align: center; color: #6c757d; padding: 20px; font-style: italic;">
+        No reports found for "${selectedPlace}". 
+        <a href="#" onclick="placeFilter.value=''; renderReports(); return false;" style="color: #6c63ff; text-decoration: none;">
+          Show all reports
+        </a>
+      </p>
+    `;
+    reportList.appendChild(noResultsDiv);
+    return;
+  }
+  
+  filteredReports.forEach((r, index) => {
+    // Find the original index in the full reports array
+    const originalIndex = reports.findIndex(report => report._id === r._id);
     const div = document.createElement("div");
     div.className = "report-item";
     div.innerHTML = `
@@ -230,7 +258,7 @@ function renderReports() {
       const newIssue = prompt("Edit issue:", r.issue);
       if (newIssue) {
         const updatedReport = { ...r, issue: newIssue };
-        const success = await updateReport(index, updatedReport);
+        const success = await updateReport(originalIndex, updatedReport);
         if (!success) {
           alert('Failed to update report. Please try again.');
         }
@@ -239,10 +267,10 @@ function renderReports() {
 
     // Remove button
     div.querySelector(".btn-remove").onclick = async () => {
-      console.log('Frontend: Remove button clicked for index:', index);
+      console.log('Frontend: Remove button clicked for index:', originalIndex);
       if (confirm('Are you sure you want to delete this report?')) {
         console.log('Frontend: User confirmed deletion');
-        const success = await deleteReport(index);
+        const success = await deleteReport(originalIndex);
         if (!success) {
           alert('Failed to delete report. Please try again.');
         }
@@ -325,6 +353,11 @@ searchInput.addEventListener("input", e => {
   renderSpaces(e.target.value);
 });
 
+// Place filter functionality
+placeFilter.addEventListener("change", () => {
+  renderReports();
+});
+
 // AI Reporting functionality
 async function submitAIReport() {
   const reportText = aiReportInput.value.trim();
@@ -340,12 +373,12 @@ async function submitAIReport() {
   aiSubmitBtn.disabled = true;
 
   // Send API request to backend
-  fetch('http://localhost:3222/api/ai-report', {
+  fetch(`${window.API_CONFIG.API_BASE_URL}${window.API_CONFIG.AI_REPORT_ENDPOINT}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ place: reportText, issue: reportText })
+    body: JSON.stringify({ text: reportText })
   })
   .then(response => {
     if (!response.ok) {
@@ -356,31 +389,20 @@ async function submitAIReport() {
   .then(async (data) => {
     console.log('AI Report response:', data);
     
-    // Add the extracted reports to the database
-    if (data.reports) {
-      // let successCount = 0;
-
-      // for (const report of data.reports) {
-      //   const success = await addReport(report);
-      //   if (success) {
-      //     successCount++;
-      //   }
-      // }
-      
-      // if (successCount > 0) {
-      //   alert(`Successfully processed ${successCount} report(s) from your text!`);
-      // } else {
-      //   alert('Failed to save reports to database.');
-      // }
+    // Reports are already saved by the backend, just refresh the display
+    if (data.reports && Array.isArray(data.reports) && data.reports.length > 0) {
+      alert(`Successfully processed ${data.reports.length} report(s) from your text!`);
+      aiReportInput.value = ''; // Clear the input only when successful
+      await fetchReports();
     } else {
-      alert('No reports could be extracted from your text.');
+      alert('No reports could be extracted from your text. Please try again with different text.');
+      // Keep the input text so user can modify and try again
     }
-    await fetchReports();
-    aiReportInput.value = ''; // Clear the input
   })
   .catch(error => {
     console.error('Error sending AI report:', error);
     alert('Error sending report. Please try again.');
+    // Keep the input text so user can modify and try again
   })
   .finally(() => {
     // Reset button state

@@ -35,6 +35,45 @@ main {
   margin-bottom: 15px;
   font-size: 1.3rem;
 }
+
+/* Report Filter */
+.report-filter {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.report-filter label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.report-filter select {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px 12px;
+  border: 2px solid #dee2e6;
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+  color: #495057;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.report-filter select:focus {
+  outline: none;
+  border-color: #6c63ff;
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+}
+
+.report-filter select:hover {
+  border-color: #adb5bd;
+}
 .report-item {
   display: flex;
   justify-content: space-between;
@@ -315,4 +354,173 @@ main {
 
 #submitReport:active {
   transform: scale(0.98);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet styles (768px and below) */
+@media (max-width: 768px) {
+  /* Header adjustments */
+  header {
+    font-size: 1.5rem;
+    padding: 15px;
+  }
+  
+  /* Main container */
+  main {
+    padding: 15px;
+  }
+  
+  /* Space cards - stack vertically */
+  .space-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .space-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .space-details {
+    margin: 15px 0;
+  }
+  
+  .contact {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .contact span {
+    font-size: 0.9rem;
+  }
+  
+  .report-btn {
+    width: 100%;
+    margin-top: 15px;
+    min-height: 44px; /* Touch friendly */
+  }
+  
+  /* Report filter */
+  .report-filter select {
+    max-width: 100%;
+  }
+  
+  /* Report items */
+  .report-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .report-item .btn {
+    width: 100%;
+  }
+  
+  /* Button container for mobile - make buttons side by side */
+  .report-item > div:last-child {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+  
+  .report-item > div:last-child .btn {
+    flex: 1;
+    width: auto;
+  }
+  
+  /* AI input container */
+  .ai-input-container {
+    flex-direction: column;
+  }
+  
+  .ai-input-container textarea {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .ai-input-container button {
+    width: 100%;
+  }
+}
+
+/* Mobile styles (480px and below) */
+@media (max-width: 480px) {
+  /* Header - smaller font */
+  header {
+    font-size: 1.3rem;
+    padding: 12px;
+  }
+  
+  /* Main container - less padding */
+  main {
+    padding: 10px;
+  }
+  
+  /* Sections - less margin */
+  .section {
+    margin-bottom: 20px;
+    padding: 15px;
+  }
+  
+  /* Space cards - smaller padding */
+  .space-card {
+    padding: 12px;
+  }
+  
+  .space-img {
+    height: 150px;
+  }
+  
+  /* Search box */
+  .search-box input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Report filter */
+  .report-filter {
+    padding: 10px;
+  }
+  
+  .report-filter select {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* AI input */
+  .ai-input-container textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Buttons - touch friendly */
+  .btn {
+    font-size: 14px;
+    padding: 12px 15px;
+    min-height: 44px; /* iOS recommended touch target size */
+  }
+  
+  /* Ensure buttons stay side by side on mobile phones */
+  .report-item > div:last-child {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+  
+  .report-item > div:last-child .btn {
+    flex: 1;
+    width: auto;
+  }
+  
+  /* Modal adjustments */
+  .modal-content {
+    width: 95%;
+    margin: 5% auto;
+    padding: 20px;
+  }
+  
+  .modal-content input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
 }

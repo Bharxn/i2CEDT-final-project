@@ -1,0 +1,31 @@
+{
+  "name": "learning-space-smart-checking-report",
+  "version": "1.0.0",
+  "description": "A smart reporting system for learning spaces with AI integration",
+  "main": "index.js",
+  "scripts": {
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "build": "echo 'No build step required for this project'",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "learning-spaces",
+    "reporting",
+    "ai",
+    "mongodb",
+    "express",
+    "nodejs"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "your-repository-url"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}

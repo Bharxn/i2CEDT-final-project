@@ -28,12 +28,12 @@ export const aiGetAllReports = async (req, res) => {
 // @access  Public
 export const aiCreateReport = async (req, res) => {
   try {
-    const { place, issue } = req.body;
+    const { text } = req.body;
     
-    if (!place || !issue) {
+    if (!text) {
       return res.status(400).json({
         success: false,
-        message: "Place and issue are required"
+        message: "Text is required"
       });
     }
     
@@ -131,7 +131,7 @@ OUTPUT
             ...fewshot_examples,
             {
             "role": "user",
-            "content": "คุณมีหน้าที่ในการดึงปัญหาย่อยจากข้อความนำเข้า โดย output อยู่ในรูปแบบ [ปัญหา 1, ปัญหา 2, ...] เท่านั้น\n" + "ข้อความนำเข้า : " + issue
+            "content": "คุณมีหน้าที่ในการดึงปัญหาย่อยจากข้อความนำเข้า โดย output อยู่ในรูปแบบ [ปัญหา 1, ปัญหา 2, ...] เท่านั้น\n" + "ข้อความนำเข้า : " + text
             }
         ],
         "model": "openai/gpt-oss-120b",
