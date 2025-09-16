@@ -23,98 +23,98 @@ const spaces = [
     tel: "0-2218-2070",
     email: "pr@law.chula.ac.th",
     link: "https://maps.app.goo.gl/7A5QtLGRfVNPvTCE9",
-    img: "https://i.postimg.cc/dtC9nPR9/img-legal-resources-center-1-1200x800.jpg"
+    img: "https://www.law.chula.ac.th/wp-content/uploads/2019/03/img-legal-resources-center-1-1200x800.jpg"
   },
   {
     name: "Architecture Library",
     tel: "0-2218-4335",
     email: "saraban_arch@chula.ac.th",
     link: "https://maps.app.goo.gl/BX74x7r4cgkK1AJC8",
-    img: "https://i.postimg.cc/ZqfTQQPf/Arch-CULib-19.jpg"
+    img: "https://www.chula.ac.th/wp-content/uploads/2020/02/cu_310163_0011-720x481-1.jpg"
   },
   {
     name: "Arts Library",
     tel: "0-2218-4891,0-2218-4851",
     email: "saraban_arch@chula.ac.th",
     link: "https://maps.app.goo.gl/6vFtf5ktrbCDq6xW9",
-    img: "https://i.postimg.cc/HLt21wjv/EMiabio-U4-AANADW.jpg"
+    img: "https://upload.wikimedia.org/wikipedia/commons/a/ac/Faculty_of_Arts_Library%2C_Chulalongkorn_University.jpg"
   },
   {
     name: "Communication Arts Library",
     tel: "0-2218-2225",
     email: "commarts@chula.ac.th",
     link: "https://maps.app.goo.gl/aFYaPgr1VrSydmqC6",
-    img: "https://i.postimg.cc/zvXNJFJd/oolgggd1k-TTH3-Zinl1-P-o.jpg"
+    img: "https://www.chula.ac.th/wp-content/uploads/2018/01/chula-faculty-communication-arts-hero-desktop.jpg"
   },
   {
     name: "Dentistry Library",
     tel: "0-2218-9017-9",
     email: " - ",
     link: "https://maps.app.goo.gl/u83xe5nMcNZyT4SW7",
-    img: "https://i.postimg.cc/qMNfjRgC/dent.jpg"
+    img: "https://www.dent.chula.ac.th/wp-content/uploads/2024/01/Picture1.png"
   },
   {
     name: "Science Library",
     tel: "0-2218-5045-7",
     email: "sciencelib.chula@gmail.com",
     link: "https://maps.app.goo.gl/mV417AH6shuDRWQU8",
-    img: "https://i.postimg.cc/T1X9mty9/science.jpg"
+    img: "https://www.arts.chula.ac.th/dlives/images/lib/S_6820693929471.jpg"
   },
   {
     name: "Chula Business School Library",
     tel: "0-2218-5725-30",
     email: " - ",
     link: "https://maps.app.goo.gl/NqH8h4gnY3K2CreT8",
-    img: "https://i.postimg.cc/rwvtKKRG/business.jpg"
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEY3jTlhpsoSiB9K3kk7-XiKb8stsUqsOVYQ&s"
   },
   {
     name: "Education Library",
     tel: "0-2218-2429",
     email: "libedu@chula.ac.th",
     link: "https://maps.app.goo.gl/1HyzyqpCuN2LQUca7",
-    img: "https://i.postimg.cc/kGz7ftmf/Education.jpg"
+    img: "https://www.edu.chula.ac.th/sites/default/files/users/user17/%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%8A%E0%B8%B1%E0%B9%89%E0%B8%991/%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%AB%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%AA%E0%B8%A1%E0%B8%B8%E0%B8%94_2.jpg"
   },
   {
     name: "Fine & Applied Arts Library",
     tel: "0-2218-4574",
     email: " - ",
     link: "https://maps.app.goo.gl/H9o6zAX9JYyUY5mi9",
-    img: "https://i.postimg.cc/pTtGhw6J/Applied-art.jpg"
+    img: "https://fa.rmutt.ac.th/wp-content/uploads/2021/06/20210615_093042-scaled.jpg"
   },
   {
     name: "Economics Library",
     tel: "0-2218-6221-2",
     email: "saraban_econ@chula.ac.th",
     link: "https://maps.app.goo.gl/wKqSPR5K86cRx3pt5",
-    img: "https://i.postimg.cc/jSFB5kTM/122871608.jpg"
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgaqPZ0-aa5_LvAdOvstsT5B7QEJbIyFcukg&s"
   },
   {
     name: "Medicine Library",
     tel: "0-2256-4266",
     email: " - ",
     link: "https://maps.app.goo.gl/U3GjWsBXXvWzQiUz8",
-    img: "https://i.postimg.cc/MHqF4C0p/oolgnqjy0-AO0-MOVo4t-Z-o.jpg"
+    img: "https://www.md.chula.ac.th/wp-content/uploads/2016/02/R2A1053-R-1024x683.jpg"
   },
   {
     name: "Pharmaceutical Science Library",
     tel: "0-2218-8300",
     email: "library@pharm.chula.ac.th",
     link: "https://maps.app.goo.gl/4fi4tKyDZZnCVVTw7",
-    img: "https://i.postimg.cc/28jtxf8H/pharm.jpg"
+    img: "https://scontent.fbkk12-3.fna.fbcdn.net/v/t1.6435-9/50519854_2413627918666904_1149785628724953088_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeGa6rM_a9Ky4Mbq-N3Rf2Ic7XNDb3uxOZntc0Nve7E5mV06pj4WUKYg4NL4jcI8wsbGVIk-CVr5gOwHxWN_Eqwq&_nc_ohc=e4I9E2hxLEYQ7kNvwH4Eyaq&_nc_oc=AdkvO0R9OmSK2XObgN8wrgz69oh5eUOEuqHIfIOrKG0ewVxcolM8_j-BtfChf-WyqCm1NCPEOzGUDALv9L0oWiVF&_nc_zt=23&_nc_ht=scontent.fbkk12-3.fna&_nc_gid=URiCH_MrlKwvGkf2JT47oA&oh=00_AfYQoKxPddY007eGcgSrS3l_03l8QjiNhUOkNjg-cH7j7A&oe=68F0E182"
   },
   {
     name: "Veterinary Science Library",
     tel: "0-2218-9554-7",
     email: " - ",
     link: "https://maps.app.goo.gl/azm4oKCekF78NCVp6",
-    img: "https://i.postimg.cc/X7MJZQj7/vet.jpg"
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZWo_1Uk_tR12C_jLQ-7kQc3SapGrrMtoyg&s"
   },
   {
     name: "Central Library, Office of Academic Resources",
     tel: "0-2218-2929, 0-2218-2918",
     email: "chulalibrary@car.chula.ac.th",
     link: "https://maps.app.goo.gl/KYPxxn9nZPBEhayGA",
-    img: "https://i.postimg.cc/XvZSk6xM/122871455.jpg"
+    img: "https://www.chula.ac.th/wp-content/uploads/2018/02/library-building-hero-02-1440x900.jpg"
   }
 ];
 
